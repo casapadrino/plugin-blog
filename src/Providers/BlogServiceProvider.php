@@ -150,13 +150,16 @@ class BlogServiceProvider extends ServiceProvider
         }, 90);
 
 
-
         // Automatic container links
-        $eventDispatcher->listen("Ceres.LayoutContainer.Template.Style", function(LayoutContainer $container) use ($twig) {
+        // CHANGED: was "Ceres.LayoutContainer.Template.Style" (global, unrestricted)
+        // Now uses a dedicated container that the theme only shows when currentPageType == 'blog'
+        $eventDispatcher->listen("Ceres.LayoutContainer.Blog.Styles", function(LayoutContainer $container) use ($twig) {
             $container->addContent($twig->render('Blog::content.Style'));
         });
 
-        $eventDispatcher->listen("Ceres.LayoutContainer.Script.Loader", function(LayoutContainer $container) use ($twig) {
+        // CHANGED: was "Ceres.LayoutContainer.Script.Loader" (global, unrestricted)
+        // Now uses a dedicated container that the theme only shows when currentPageType == 'blog'
+        $eventDispatcher->listen("Ceres.LayoutContainer.Blog.Scripts", function(LayoutContainer $container) use ($twig) {
             $container->addContent($twig->render('Blog::content.Scripts'));
         });
 
