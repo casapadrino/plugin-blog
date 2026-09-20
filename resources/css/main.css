@@ -266,6 +266,11 @@
   padding: 15px 60px;
 }
 
+/* CHANGED: Knopf unter den aehnlichen Beitraegen ohne den 70px-Abstand der Kategorieliste */
+.blog-related-posts .blog-load-more .blog-btn-load-more {
+  margin-bottom: 0;
+}
+
 /* line 158, /workspace/localsystem/plugins/inbox/plugins/Blog/resources/scss/_blog.scss */
 .blog-sidebar .blog-sidebar-section {
   margin-bottom: 50px;

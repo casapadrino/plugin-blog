@@ -82,7 +82,10 @@
                                        layout="horizontal-MD"
                                        ignore-post="{{ blogPost.data.post.urlName }}"
                                        :category-id="{{ blogPost.data.category.id }}"
-                                       :filters="{'itemsPerPage':6}"
+                                       {# CHANGED: siehe Default.twig, volles Sechser-Raster plus "Mehr laden". #}
+                                       :filters="{'itemsPerPage':7}"
+                                       :max-posts="6"
+                                       show-load-more
                                        show-loader :show-no-results-text="false">
                             </blog-list>
                         </client-only>

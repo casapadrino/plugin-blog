@@ -32,7 +32,7 @@
         </div>
 
         <div class="blog-load-more" v-if="showLoadMore">
-            <button v-if="page < lastPageNumber || loadMoreIsLoading" class="btn blog-btn-load-more" @click="loadMore()" :disabled="loadMoreIsLoading" > {{ trans('Blog::Template.loadMore') }} </button>
+            <button v-if="page < lastPageNumber || loadMoreIsLoading" class="btn blog-btn-load-more" @click="loadMore()" :disabled="loadMoreIsLoading" > {{ trans('Blog::Template.loadMore') }} <i class="fa fa-angle-down ml-2" aria-hidden="true"></i> </button>
         </div>
     </div>
 
@@ -105,6 +105,17 @@
             ignorePost: {
                 type: String,
                 required: false
+            },
+            // CHANGED: Obergrenze der angezeigten Beitraege je geladener Seite.
+            // Hintergrund: ignorePost wirft den gerade gelesenen Beitrag NACH dem Laden
+            // raus. Wer itemsPerPage=6 anfordert, sieht darum auf einem der sechs
+            // juengsten Beitraege nur fuenf Kacheln und eine Luecke im Raster.
+            // Loesung: eine Kachel mehr anfordern und die Liste hier wieder auf das
+            // volle Raster kuerzen. 0 = aus (Standardverhalten).
+            maxPosts: {
+                type: Number,
+                required: false,
+                default: 0
             }
         },
 
@@ -162,6 +173,11 @@
                                 _this.articleList.push(value);
                             }
                         });
+
+                        // CHANGED: volles Raster halten, siehe Prop maxPosts.
+                        if(_this.maxPosts > 0) {
+                            _this.articleList = _this.articleList.slice(0, Number(page) * _this.maxPosts);
+                        }
 
                         if(data.entries.length === 0){
                             $('.blog-search-input').focus();

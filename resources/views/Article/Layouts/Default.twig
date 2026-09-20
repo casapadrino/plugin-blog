@@ -84,7 +84,14 @@
                                        layout="horizontal-MD"
                                        ignore-post="{{ blogPost.data.post.urlName }}"
                                        :category-id="{{ blogPost.data.category.id }}"
-                                       :filters="{'itemsPerPage':6}"
+                                       {# CHANGED: eine Kachel mehr anfordern als angezeigt wird, weil
+                                          ignore-post den gerade gelesenen Beitrag erst nach dem Laden
+                                          entfernt und sonst eine Luecke im Raster bleibt. max-posts
+                                          kuerzt wieder auf sechs, show-load-more blendet den Knopf
+                                          "Mehr laden" fuer aeltere Beitraege ein. #}
+                                       :filters="{'itemsPerPage':7}"
+                                       :max-posts="6"
+                                       show-load-more
                                        show-loader :show-no-results-text="false">
                             </blog-list>
                         </client-only>

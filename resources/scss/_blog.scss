@@ -154,6 +154,14 @@
     }
 }
 
+// CHANGED: unter den aehnlichen Beitraegen steht der Knopf direkt ueber dem Footer,
+// die 70px aus der Kategorieliste reissen dort ein Loch.
+.blog-related-posts {
+    .blog-load-more .blog-btn-load-more {
+        margin-bottom:0;
+    }
+}
+
 .blog-sidebar {
     .blog-sidebar-section {
         margin-bottom:50px;
